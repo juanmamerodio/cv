@@ -3,202 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diseño Carrusel Ascender</title>
-    <!-- Importamos Poppins de Google Fonts -->
+    <title>Juan Manuel Merodio - Curriculum Vitae</title>
+    
+    <!-- Fuentes: Inter para un look bien Apple/Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS para el diseño rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons para iconografía minimalista -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-50': '#f0fdfa',
+                        'brand-100': '#ccfbf1',
+                        'brand-500': '#14b8a6', // Teal moderno
+                        'brand-600': '#0d9488',
+                        'brand-900': '#134e4a',
+                        'dark-surface': '#1c1c1e', // Estilo iOS dark
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* RESET Y BASE */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            background-color: #222; /* Fondo oscuro para resaltar el diseño al editar */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
+            /* Fondo sutilmente texturizado / degradado minimalista */
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 0% 0%, hsla(173,100%,76%,0.15) 0, transparent 50%), radial-gradient(at 100% 100%, hsla(214,100%,82%,0.15) 0, transparent 50%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* LIENZO PRINCIPAL (1080x1080px para Instagram) */
-        .instagram-post {
-            width: 1080px; /* Tamaño real IG */
-            height: 1080px; /* Tamaño real IG */
-            background-color: #f7f2e9; /* Fondo Ascender */
-            color: #2d424b; /* Color Primario Ascender */
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Distribuye espacio entre header, contenido y footer */
-            padding: 80px; /* Margen interno generoso (respiración Apple) */
-            box-shadow: 0 0 50px rgba(0,0,0,0.5); /* Sombra solo para visualización web */
-            
-            /* TRUCO PARA QUE SE VEA EN PANTALLAS CHICAS (ESCALADO) */
-            /* Si sacas captura, asegurate de estar al 100% de zoom o ajusta esto */
-            transform: scale(0.6); 
-            transform-origin: center;
+        /* Estilo iOS/Android moderno: Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+            border-radius: 28px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* --- ELEMENTOS DE DISEÑO --- */
-
-        /* 1. Header: Logo */
-        .header {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.08);
         }
 
-        .logo-text {
-            font-weight: 700;
-            font-size: 28px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            /* Eliminamos el borde inferior que lo hacía parecer más un título, preparado para un icono */
-            /* border-bottom: 2px solid #2d424b; */
-            padding-bottom: 0px; 
-        }
-        /* Si se reemplaza por un <img/> o <svg/>, adaptar este estilo o usar un contenedor */
-
-        /* 2. Contenido Central */
-        .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start; /* Alineación Apple: Izquierda o Centro. Izquierda es más lectura rápida. */
-            gap: 30px;
+        /* Animaciones de entrada */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Pill / Etiqueta del Módulo */
-        .module-tag {
-            background-color: rgba(45, 66, 75, 0.1); /* Color primario al 10% opacidad */
-            color: #2d424b;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 24px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            display: inline-block;
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Título Principal (El Gancho) */
-        .headline {
-            font-size: 86px; /* Grande y bold */
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -2px; /* Kerning apretado estilo editorial */
-        }
+        /* Delays para efecto cascada */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
 
-        /* Subtítulo o Bajada */
-        .sub-headline {
-            font-size: 38px;
-            font-weight: 400;
-            line-height: 1.4;
-            opacity: 0.85; /* Un poco más suave */
-            max-width: 90%;
+        .pill {
+            background: rgba(20, 184, 166, 0.1);
+            color: #0d9488;
+            border: 1px solid rgba(20, 184, 166, 0.2);
         }
-
-        /* Línea decorativa minimalista */
-        .separator {
-            width: 120px;
-            height: 6px;
-            background-color: #2d424b;
-            border-radius: 3px;
-            margin-top: 20px;
-        }
-
-        /* 3. Footer: Indicador de Swipe o Branding sutil */
-        .footer {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .footer-brand {
-            font-size: 20px;
-            font-weight: 500;
-            opacity: 0.6;
-        }
-
-        .swipe-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        /* Icono de flecha simple con CSS */
-        .arrow-right {
-            width: 0; 
-            height: 0; 
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-left: 15px solid #2d424b;
-        }
-
-        /* --- CLASES DE UTILIDAD PARA CAMBIAR EL TEXTO FÁCILMENTE --- */
-        .highlight {
-            color: #2d424b; /* Opcional: Si queres resaltar una palabra en otro tono, definilo acá */
-            font-style: italic; /* Opcional: para darle énfasis a palabras clave */
-        }
-
     </style>
 </head>
-<body>
+<body class="text-slate-800 min-h-screen p-4 sm:p-8 md:py-12 flex justify-center">
 
-    <!-- LIENZO DE CAPTURA (1080x1080) -->
-    <!-- Para editar: Cambiá el texto dentro de los divs -->
-    
-    <div class="instagram-post">
-        
-        <!-- HEADER: LOGO -->
-        <div class="header">
-            <!-- NOTA: REEMPLAZÁ ESTE DIV COMPLETO CON LA ETIQUETA <img> O <svg> DEL ICONO DE ASCENDER. -->
-            <!-- Ejemplo: <img src="URL_DEL_ICONO" alt="Ascender Logo" style="height: 40px; width: auto;"> -->
-            <div class="logo-text">ASCENDER</div>
-        </div>
+    <main class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <div class="content">
-            <!-- ETIQUETA DEL MÓDULO -->
-            <div class="module-tag">Módulo 5</div>
-
-            <!-- TÍTULO FUERTE -->
-            <h1 class="headline">
-                Difícil será <br>decir que no.
-            </h1>
-
-            <!-- SEPARADOR -->
-            <div class="separator"></div>
-
-            <!-- BAJADA / VALOR -->
-            <p class="sub-headline">
-                No se trata de vender más. Se trata de crear una oferta tan valiosa que el cliente se sienta estúpido si la rechaza.
-            </p>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="footer">
-            <div class="footer-brand">@ascender.uno</div>
+        <!-- CABECERA PRINCIPAL (Ocupa todo el ancho en desktop) -->
+        <header class="glass-card lg:col-span-12 p-8 md:p-10 fade-in-up flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+            <!-- Deco circle -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-brand-100 rounded-full blur-3xl opacity-50 z-0"></div>
             
-            <div class="swipe-indicator">
-                <span>DESLIZÁ</span>
-                <div class="arrow-right"></div>
+            <div class="relative z-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-2">
+                    Juan Manuel Merodio
+                </h1>
+                <h2 class="text-xl md:text-2xl font-medium text-brand-600 mb-4">
+                    Desarrollador Web & Estratega de Marketing
+                </h2>
+                <p class="text-slate-600 max-w-2xl leading-relaxed">
+                    Emprendedor tecnológico enfocado en la intersección entre código y ventas. 
+                    Ayudo a marcas a escalar su facturación combinando desarrollo web moderno, 
+                    estrategias de conversión y creación de contenido de alto impacto.
+                </p>
             </div>
-        </div>
 
-    </div>
+            <!-- Datos de Contacto rápidos -->
+            <div class="relative z-10 flex flex-col gap-3 text-sm text-slate-600 w-full md:w-auto mt-4 md:mt-0 bg-white/50 p-5 rounded-2xl border border-white/60">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-brand-500"></i>
+                    <span>CABA (Recoleta) / Campana, Bs. As.</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="mail" class="w-5 h-5 text-brand-500"></i>
+                    <a href="mailto:hola@tucorreo.com" class="hover:text-brand-600 transition-colors">juanm.merodio@email.com</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="linkedin" class="w-5 h-5 text-brand-500"></i>
+                    <a href="#" class="hover:text-brand-600 transition-colors">linkedin.com/in/juanmerodio</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="github" class="w-5 h-5 text-brand-500"></i>
+                    <a href="#" class="hover:text-brand-600 transition-colors">github.com/juanmerodio</a>
+                </div>
+            </div>
+        </header>
 
+        <!-- COLUMNA IZQUIERDA (Skills, Educación, Logros) -->
+        <aside class="lg:col-span-4 flex flex-col gap-6">
+            
+            <!-- TROFEO / LOGRO PRINCIPAL -->
+            <div class="glass-card p-6 fade-in-up delay-100 bg-gradient-to-br from-brand-50 to-white">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="p-2 bg-brand-100 rounded-xl text-brand-600">
+                        <i data-lucide="trophy" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800">Logro Destacado</h3>
+                </div>
+                <div class="p-4 bg-white rounded-2xl border border-brand-100 shadow-sm">
+                    <h4 class="font-bold text-brand-600">Campeón Nacional (1° Puesto)</h4>
+                    <p class="text-sm text-slate-600 font-medium mb-1">Olimpiada de Informática Argentina (OIA)</p>
+                    <p class="text-xs text-slate-500">2023</p>
+                </div>
+            </div>
+
+            <!-- HABILIDADES TECNICAS -->
+            <div class="glass-card p-6 fade-in-up delay-200">
+                <div class="flex items-center gap-3 mb-5">
+                    <i data-lucide="code-2" class="w-5 h-5 text-slate-400"></i>
+                    <h3 class="text-lg font-bold text-slate-800">Tech & Desarrollo</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-full text-sm font-medium pill">React (JS)</span>
+                    <span class="px-3 py-1.5 rounded-full text-sm font-medium pill">JavaScript</span>
+                    <span class="px-3 py-1.5 rounded-full text-sm font-medium pill">HTML & CSS</span>
+                    <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-700">Python</span>
+                    <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-700">C++</span>
+                    <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-700">C</span>
+                </div>
+            </div>
+
+            <!-- MARKETING Y MEDIOS -->
+            <div class="glass-card p-6 fade-in-up delay-300">
+                <div class="flex items-center gap-3 mb-5">
+                    <i data-lucide="trending-up" class="w-5 h-5 text-slate-400"></i>
+                    <h3 class="text-lg font-bold text-slate-800">Marketing & Media</h3>
+                </div>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5"></i>
+                        <span class="text-sm text-slate-600">Estrategia para Marcas Personales</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5"></i>
+                        <span class="text-sm text-slate-600">Edición de Video Profesional (Short-form)</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5"></i>
+                        <span class="text-sm text-slate-600">Copywriting Comercial</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5"></i>
+                        <span class="text-sm text-slate-600">Inglés Técnico (Básico)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- EDUCACIÓN -->
+            <div class="glass-card p-6 fade-in-up delay-400">
+                <div class="flex items-center gap-3 mb-5">
+                    <i data-lucide="graduation-cap" class="w-5 h-5 text-slate-400"></i>
+                    <h3 class="text-lg font-bold text-slate-800">Educación</h3>
+                </div>
+                
+                <div class="relative pl-4 border-l-2 border-slate-200 mb-4">
+                    <div class="absolute w-3 h-3 bg-brand-500 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                    <h4 class="font-semibold text-slate-800">Tecnicatura en Programación</h4>
+                    <p class="text-sm text-slate-500">Escuela Técnica N°1 (En curso)</p>
+                    <p class="text-xs text-slate-400 mt-1">Incluye Taller Básico completado.</p>
+                </div>
+
+                <div class="relative pl-4 border-l-2 border-slate-200">
+                    <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[7px] top-1.5 ring-4 ring-white"></div>
+                    <h4 class="font-semibold text-slate-800 text-sm">Formación Musical (FOBA)</h4>
+                    <p class="text-xs text-slate-500">Escuela de Arte Pedro Carpani</p>
+                    <p class="text-xs text-slate-400 mt-1">2018 - 2019 • Teoría musical completa, multi-instrumentista.</p>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- COLUMNA DERECHA (Experiencia Laboral) -->
+        <section class="lg:col-span-8 flex flex-col gap-6">
+            
+            <div class="glass-card p-6 md:p-8 fade-in-up delay-200">
+                <div class="flex items-center gap-3 mb-8">
+                    <i data-lucide="briefcase" class="w-6 h-6 text-brand-500"></i>
+                    <h3 class="text-2xl font-bold text-slate-800">Experiencia Profesional</h3>
+                </div>
+
+                <!-- ITEM DE EXPERIENCIA: DELTA -->
+                <div class="mb-10 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h4 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Agencia Delta</h4>
+                        <span class="text-sm font-medium text-brand-600 bg-brand-50 px-3 py-1 rounded-full w-fit mt-2 md:mt-0">2024 - Presente</span>
+                    </div>
+                    <div class="text-md font-medium text-slate-600 mb-3">Fundador & Estratega Principal</div>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Fundación y gestión de una agencia de marketing digital orientada a escalar la facturación de marcas personales a través de servicios integrales de tecnología y contenido.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-brand-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700"><strong>Desarrollo Web:</strong> Gestión y creación de landing pages y sitios web. Apertura de un programa exitoso con 10 cupos a precios accesibles para emprendedores de Campana.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-brand-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700"><strong>Gestión de Clientes:</strong> Logro de <strong>+10 clientes recurrentes y satisfechos</strong>, optimizando sus procesos de ventas.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-brand-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700"><strong>Content Creation:</strong> Edición profesional de videos de formato corto (Reels/Shorts/TikToks) orientados a alta retención y conversión.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="border-slate-100 mb-8">
+
+                <!-- ITEM DE EXPERIENCIA: TEATRO ASTROS -->
+                <div class="mb-10 group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h4 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Teatro Astros CABA</h4>
+                        <span class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit mt-2 md:mt-0">2025 - 2026</span>
+                    </div>
+                    <div class="text-md font-medium text-slate-600 mb-3">Atención al Cliente & Relaciones Públicas</div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-slate-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700">Gestión de la experiencia del espectador en un entorno de alto tráfico, resolviendo consultas y garantizando la satisfacción del público.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-slate-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700">Desarrollo de habilidades de comunicación interpersonal y manejo de situaciones dinámicas en tiempo real.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="border-slate-100 mb-8">
+
+                <!-- ITEM DE EXPERIENCIA: TAXI DELTA -->
+                <div class="group">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h4 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Taxi Delta</h4>
+                        <span class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit mt-2 md:mt-0">2023 - 2024</span>
+                    </div>
+                    <div class="text-md font-medium text-slate-600 mb-3">Telefonista & Coordinación Logística</div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-slate-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700">Recepción de llamadas y gestión de reservas en simultáneo, requiriendo alta capacidad de multitasking y organización.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i data-lucide="arrow-right-circle" class="w-4 h-4 text-slate-400 mt-0.5 shrink-0"></i>
+                            <span class="text-sm text-slate-700">Resolución de conflictos logísticos y optimización de rutas mediante comunicación constante con los conductores.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Inicialización de íconos -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
