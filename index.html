@@ -1,404 +1,1635 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Manuel Merodio - Curriculum Vitae</title>
-    
-    <!-- Fuentes: Inter para un look bien Apple/Google -->
+    <title>Juan Manuel Merodio | Full-Stack Developer & Strategist</title>
+    <meta name="description"
+        content="Portfolio de Juan Manuel Merodio. Desarrollador Full-Stack, optimización de negocios y fundador de Delta.">
+
+    <!-- Favicon para evitar error 404 -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://juanmamerodio.github.io/cv/">
+    <meta property="og:title" content="Juan Manuel Merodio | Full-Stack Developer & Strategist">
+    <meta property="og:description"
+        content="Portfolio de Juan Manuel Merodio. Desarrollador Full-Stack, optimización de negocios y fundador de Delta.">
+    <meta property="og:image" content="https://juanmamerodio.github.io/cv/Ascender%20icon%20-%20copia.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://juanmamerodio.github.io/cv/">
+    <meta property="twitter:title" content="Juan Manuel Merodio | Full-Stack Developer & Strategist">
+    <meta property="twitter:description"
+        content="Portfolio de Juan Manuel Merodio. Desarrollador Full-Stack, optimización de negocios y fundador de Delta.">
+    <meta property="twitter:image" content="https://juanmamerodio.github.io/cv/Ascender%20icon%20-%20copia.png">
+
+    <!-- Fuentes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS para el diseño rápido y responsivo -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons para iconografía minimalista -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;800&display=swap"
+        rel="stylesheet">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        display: ['Syncopate', 'sans-serif'],
                     },
                     colors: {
-                        'brand-50': '#f0fdfa',
-                        'brand-100': '#ccfbf1',
-                        'brand-500': '#14b8a6', // Teal moderno
-                        'brand-600': '#0d9488',
-                        'brand-900': '#134e4a',
-                        'dark-surface': '#1c1c1e', // Estilo iOS dark
+                        bgDark: '#000000',
+                        textLight: '#f5f5f7',
+                        textMuted: '#86868b',
+                        accent: '#ffffff',
+                        brandTeal: '#14b8a6'
                     }
                 }
             }
         }
     </script>
 
+    <!-- Estilos Personalizados para Experiencia Premium -->
     <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
         body {
-            /* Fondo sutilmente texturizado / degradado minimalista */
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, hsla(173,100%,76%,0.2) 0, transparent 50%), radial-gradient(at 100% 100%, hsla(214,100%,82%,0.2) 0, transparent 50%);
-            background-attachment: fixed;
+            background-color: #000000;
+            color: #f5f5f7;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Estilo iOS/Android moderno: Glassmorphism */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06);
-            border-radius: 28px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Ruido granulado para textura cinematográfica */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.035;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .glass-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+        /* Contenedor del Canvas 3D */
+        #webgl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.55;
+            pointer-events: none;
         }
 
-        /* Animaciones de entrada */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        /* Ocultar cursor personalizado por defecto (por ej. en móviles) */
+        .custom-cursor {
+            display: none;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+        /* Activar cursor personalizado y ocultar el nativo solo si el dispositivo tiene un puntero preciso */
+        @media (pointer: fine) {
+
+            body,
+            a,
+            button {
+                cursor: none;
+            }
+
+            .custom-cursor {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: var(--cursor-size);
+                height: var(--cursor-size);
+                border-radius: 50%;
+                background-color: white;
+                mix-blend-mode: difference;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                    height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                    background-color 0.3s ease;
+                will-change: transform, width, height;
+            }
+
+            .custom-cursor.hover {
+                width: 60px;
+                height: 60px;
+                background-color: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                mix-blend-mode: normal;
             }
         }
 
-        /* Delays para efecto cascada */
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-        .delay-400 { animation-delay: 400ms; }
-        .delay-500 { animation-delay: 500ms; }
-
-        .pill {
-            background: rgba(20, 184, 166, 0.1);
-            color: #0d9488;
-            border: 1px solid rgba(20, 184, 166, 0.2);
-            transition: all 0.2s ease;
+        /* Tipografía gigante estilo Apple */
+        .text-huge {
+            font-size: clamp(2.5rem, 8.5vw, 11rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
         }
-        
-        .pill:hover {
-            background: rgba(20, 184, 166, 0.15);
-            transform: scale(1.05);
+
+        /* ========================================= */
+        /* HERO SECTION — PREMIUM STYLES            */
+        /* ========================================= */
+
+        /* Status Badge — Glassmorphism Pill */
+        .hero-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px 6px 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            opacity: 0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #34d399;
+            animation: pulse-dot 2s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px rgba(52, 211, 153, 0.6); }
+            50% { opacity: 0.6; transform: scale(0.85); box-shadow: 0 0 16px rgba(52, 211, 153, 0.9); }
+        }
+
+        /* Hero Title — Gradient Accent on Last Name */
+        .hero-title {
+            font-size: clamp(3rem, 9vw, 10rem);
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .hero-title-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #14b8a6 60%, #0d9488 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Typewriter effect */
+        .hero-typewriter {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(14px, 2vw, 20px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            min-height: 1.8em;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+        }
+
+        .hero-typewriter .tw-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: #14b8a6;
+            margin-left: 4px;
+            animation: blink-cursor 0.8s step-end infinite;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Hero Description */
+        .hero-description {
+            font-size: clamp(14px, 1.5vw, 18px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.7;
+            max-width: 420px;
+            opacity: 0;
+        }
+
+        /* Hero CTA Buttons */
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            opacity: 0;
+        }
+
+        .hero-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 9999px;
+            background: #ffffff;
+            color: #000000;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta-primary:hover {
+            background: #14b8a6;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(20, 184, 166, 0.3);
+        }
+
+        .hero-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 9999px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-cta-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -5px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Stats */
+        .hero-stats {
+            display: flex;
+            gap: clamp(24px, 4vw, 56px);
+            opacity: 0;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat-number {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(28px, 3.5vw, 48px);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 6px;
+        }
+
+        /* Hero Divider Line */
+        .hero-divider {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.4), transparent);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+        }
+
+        .scroll-indicator span {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.3);
+            writing-mode: vertical-lr;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(20, 184, 166, 0.6), transparent);
+            animation: scroll-line-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-line-pulse {
+            0%, 100% { transform: scaleY(1); opacity: 0.6; }
+            50% { transform: scaleY(0.5); opacity: 1; }
+        }
+
+        /* Hero 3D Canvas Container */
+        #hero-3d-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+        }
+
+        #hero-3d-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Floating Decorative Elements */
+        .hero-float-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.15), transparent);
+            height: 1px;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .hero-float-circle {
+            position: absolute;
+            border: 1px solid rgba(20, 184, 166, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* ========================================= */
+        /* END HERO STYLES                          */
+        /* ========================================= */
+
+        /* Utilidades de revelado para GSAP */
+        .reveal-text,
+        .reveal-up {
+            opacity: 0;
+        }
+
+        /* Tarjeta Estilo Apple Premium */
+        .apple-card {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .apple-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .apple-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 50px 0 rgba(20, 184, 166, 0.08);
+        }
+
+        .apple-card-img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .apple-card:hover .apple-card-img {
+            transform: scale(1.06);
+        }
+
+        /* Hover de links de proyectos */
+        .project-arrow {
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Glassmorphism sutil para tags */
+        .glass-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Lenis smooth scrolling reset */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="text-slate-800 min-h-screen p-4 sm:p-8 md:py-12 flex justify-center">
 
-    <main class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-6">
+<body class="selection:bg-white selection:text-black">
 
-        <!-- CABECERA PRINCIPAL (Ocupa todo el ancho en desktop) -->
-        <header class="glass-card lg:col-span-12 p-8 md:p-10 fade-in-up flex flex-col-reverse md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            <!-- Deco circle -->
-            <div class="absolute -top-20 -right-20 w-72 h-72 bg-brand-100 rounded-full blur-3xl opacity-60 z-0"></div>
-            
-            <!-- Info Principal -->
-            <div class="relative z-10 w-full md:w-2/3 text-center md:text-left">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-800 to-brand-600">
-                    Juan Manuel Merodio
-                </h1>
-                <h2 class="text-xl md:text-2xl font-semibold text-brand-600 mb-5">
-                    Desarrollador Web & Estratega de Marketing
-                </h2>
-                <p class="text-slate-600 max-w-2xl leading-relaxed text-sm md:text-base">
-                    Emprendedor tecnológico enfocado en la intersección entre código y ventas. 
-                    Ayudo a marcas a escalar su facturación combinando desarrollo web moderno, 
-                    estrategias de conversión y creación de contenido de alto impacto.
-                </p>
+    <!-- Capa de Ruido -->
+    <div class="noise-overlay"></div>
+
+    <!-- Cursor Personalizado -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <!-- Contenedor 3D -->
+    <div id="webgl-container"></div>
+
+    <!-- Navbar Minimalista Estilo Apple Glass -->
+    <header class="fixed top-6 left-0 w-full z-40 px-6 flex justify-center items-center transition-all duration-300">
+        <nav
+            class="w-full max-w-5xl bg-white/[0.01] border border-white/[0.08] backdrop-filter backdrop-blur-2xl -webkit-backdrop-filter backdrop-blur-2xl rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+            <div class="font-display font-bold text-base tracking-widest uppercase hover-trigger text-white"
+                data-cursor="hover">
+                JMM.
             </div>
-
-            <!-- Foto de Perfil (Placeholder) -->
-            <div class="relative z-10 shrink-0 mt-2 md:mt-0">
-                <!-- Marco de la foto con gradiente y sombra -->
-                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full p-1.5 bg-gradient-to-tr from-brand-400 via-brand-200 to-brand-50 shadow-xl shadow-brand-500/20">
-                    <div class="w-full h-full bg-slate-100 rounded-full border-4 border-white flex items-center justify-center overflow-hidden relative group">
-                        
-                        <!-- ICONO PLACEHOLDER -->
-                        <i data-lucide="camera" class="w-8 h-8 text-slate-400 group-hover:scale-110 transition-transform duration-300"></i>
-                        
-                        <!-- INSTRUCCIÓN: Cuando tengas tu foto real, borrá la etiqueta <i> de arriba y descomentá la etiqueta <img> de abajo -->
-                        <!-- <img src="URL_DE_TU_FOTO" alt="Juan Manuel Merodio" class="w-full h-full object-cover"> -->
-                        
-                    </div>
-                </div>
+            <div class="hidden md:flex gap-8 font-medium text-xs tracking-wider uppercase text-white/70">
+                <a href="#about" class="hover-trigger relative group overflow-hidden" data-cursor="hover">
+                    <span
+                        class="inline-block transition-transform duration-300 group-hover:-translate-y-full">About</span>
+                    <span
+                        class="absolute left-0 top-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-white">About</span>
+                </a>
+                <a href="#projects" class="hover-trigger relative group overflow-hidden" data-cursor="hover">
+                    <span
+                        class="inline-block transition-transform duration-300 group-hover:-translate-y-full">Work</span>
+                    <span
+                        class="absolute left-0 top-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-white">Work</span>
+                </a>
+                <a href="#experience" class="hover-trigger relative group overflow-hidden" data-cursor="hover">
+                    <span
+                        class="inline-block transition-transform duration-300 group-hover:-translate-y-full">Experience</span>
+                    <span
+                        class="absolute left-0 top-0 inline-block transition-transform duration-300 translate-y-full group-hover:translate-y-0 text-white">Experience</span>
+                </a>
             </div>
-        </header>
+            <a href="mailto:juanm.merodio@email.com"
+                class="font-medium text-xs uppercase tracking-wider bg-white text-black rounded-full px-5 py-2.5 hover:bg-brandTeal hover:text-white transition-all duration-300 hover-trigger"
+                data-cursor="hover">
+                Contact
+            </a>
+        </nav>
+    </header>
 
-        <!-- COLUMNA IZQUIERDA (Skills, Educación, Logros) -->
-        <aside class="lg:col-span-4 flex flex-col gap-6">
-            
-            <!-- CONTACTO (CHIPS) -->
-            <div class="glass-card p-6 fade-in-up delay-100">
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 pl-1">Contacto Directo</h3>
-                <div class="flex flex-col gap-3">
-                    <a href="#" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-white transition-all border border-transparent hover:border-brand-100 hover:shadow-sm group">
-                        <div class="p-2.5 bg-brand-50 text-brand-600 rounded-xl group-hover:scale-110 transition-transform"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
-                        <span class="text-sm font-medium text-slate-600 group-hover:text-brand-600 transition-colors">CABA / Campana, Bs. As.</span>
-                    </a>
-                    <a href="mailto:juanm.merodio@email.com" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-white transition-all border border-transparent hover:border-brand-100 hover:shadow-sm group">
-                        <div class="p-2.5 bg-brand-50 text-brand-600 rounded-xl group-hover:scale-110 transition-transform"><i data-lucide="mail" class="w-4 h-4"></i></div>
-                        <span class="text-sm font-medium text-slate-600 truncate group-hover:text-brand-600 transition-colors">juanm.merodio@email.com</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-white transition-all border border-transparent hover:border-brand-100 hover:shadow-sm group">
-                        <div class="p-2.5 bg-brand-50 text-brand-600 rounded-xl group-hover:scale-110 transition-transform"><i data-lucide="linkedin" class="w-4 h-4"></i></div>
-                        <span class="text-sm font-medium text-slate-600 group-hover:text-brand-600 transition-colors">/in/juanmerodio</span>
-                    </a>
-                    <a href="#" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-white transition-all border border-transparent hover:border-slate-200 hover:shadow-sm group">
-                        <div class="p-2.5 bg-slate-100 text-slate-600 rounded-xl group-hover:scale-110 transition-transform"><i data-lucide="github" class="w-4 h-4"></i></div>
-                        <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">/juanmerodio</span>
-                    </a>
-                </div>
-            </div>
+    <main>
+        <!-- HERO SECTION — REDESIGNED MASTERPIECE -->
+        <section id="hero" class="min-h-screen relative flex items-center overflow-hidden">
 
-            <!-- TROFEO / LOGRO PRINCIPAL -->
-            <div class="glass-card p-6 fade-in-up delay-200 bg-gradient-to-br from-brand-50/80 to-white relative overflow-hidden">
-                <div class="absolute -right-4 -bottom-4 opacity-5">
-                    <i data-lucide="award" class="w-32 h-32"></i>
-                </div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="p-2.5 bg-brand-500 text-white rounded-xl shadow-md shadow-brand-500/30">
-                            <i data-lucide="trophy" class="w-5 h-5"></i>
+            <!-- Floating Decorative Lines -->
+            <div class="hero-float-line" style="top: 20%; left: -5%; width: 35%;"></div>
+            <div class="hero-float-line" style="bottom: 25%; right: -5%; width: 30%;"></div>
+            <div class="hero-float-circle" style="top: 15%; right: 10%; width: 200px; height: 200px;"></div>
+            <div class="hero-float-circle" style="bottom: 10%; left: 5%; width: 120px; height: 120px;"></div>
+
+            <!-- Main Hero Content -->
+            <div class="w-full max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-16 pt-28 pb-8 relative z-10">
+
+                <!-- Top Row: Split Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+
+                    <!-- Left Column: Text Content -->
+                    <div class="lg:col-span-6 xl:col-span-7 flex flex-col gap-6">
+
+                        <!-- Status Badge -->
+                        <div class="hero-status-badge" id="hero-badge">
+                            <span class="status-dot"></span>
+                            Available for freelance
                         </div>
-                        <h3 class="text-lg font-bold text-slate-800">Logro Destacado</h3>
-                    </div>
-                    <div class="p-4 bg-white rounded-2xl border border-brand-100 shadow-sm hover:border-brand-300 transition-colors">
-                        <h4 class="font-bold text-brand-600 text-lg leading-tight mb-1">Campeón Nacional <br><span class="text-sm font-semibold text-slate-600">(1° Puesto)</span></h4>
-                        <p class="text-sm text-slate-600 font-medium mb-1">Olimpiada de Informática Argentina (OIA)</p>
-                        <p class="text-xs font-bold text-brand-500 bg-brand-50 w-fit px-2 py-1 rounded-md mt-2">2023</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- HABILIDADES TECNICAS -->
-            <div class="glass-card p-6 fade-in-up delay-300">
-                <div class="flex items-center gap-3 mb-5">
-                    <i data-lucide="code-2" class="w-5 h-5 text-slate-400"></i>
-                    <h3 class="text-lg font-bold text-slate-800">Tech & Desarrollo</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1.5 rounded-full text-sm font-medium pill cursor-default">React (JS)</span>
-                    <span class="px-3 py-1.5 rounded-full text-sm font-medium pill cursor-default">JavaScript</span>
-                    <span class="px-3 py-1.5 rounded-full text-sm font-medium pill cursor-default">HTML & CSS</span>
-                    <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-default">Python</span>
-                    <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-default">C++</span>
-                    <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-default">C</span>
-                </div>
-            </div>
-
-            <!-- MARKETING Y MEDIOS -->
-            <div class="glass-card p-6 fade-in-up delay-400">
-                <div class="flex items-center gap-3 mb-5">
-                    <i data-lucide="trending-up" class="w-5 h-5 text-slate-400"></i>
-                    <h3 class="text-lg font-bold text-slate-800">Marketing & Media</h3>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-2 group">
-                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">Estrategia para Marcas Personales</span>
-                    </li>
-                    <li class="flex items-start gap-2 group">
-                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">Edición de Video Profesional (Short-form)</span>
-                    </li>
-                    <li class="flex items-start gap-2 group">
-                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">Copywriting Comercial</span>
-                    </li>
-                    <li class="flex items-start gap-2 group">
-                        <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-500 mt-0.5 group-hover:scale-110 transition-transform"></i>
-                        <span class="text-sm text-slate-600 group-hover:text-slate-800 transition-colors">Inglés Técnico (Básico)</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- EDUCACIÓN -->
-            <div class="glass-card p-6 fade-in-up delay-500">
-                <div class="flex items-center gap-3 mb-5">
-                    <i data-lucide="graduation-cap" class="w-5 h-5 text-slate-400"></i>
-                    <h3 class="text-lg font-bold text-slate-800">Educación</h3>
-                </div>
-                
-                <div class="relative pl-4 border-l-2 border-brand-200 mb-5 group hover:border-brand-400 transition-colors">
-                    <div class="absolute w-3 h-3 bg-brand-500 rounded-full -left-[7px] top-1.5 ring-4 ring-white group-hover:scale-125 transition-transform"></div>
-                    <h4 class="font-semibold text-slate-800">Tecnicatura en Programación</h4>
-                    <p class="text-sm text-slate-500">Escuela Técnica N°1 (En curso)</p>
-                    <p class="text-xs text-brand-600 mt-1 font-medium bg-brand-50 w-fit px-2 py-0.5 rounded">Incluye Taller Básico completado</p>
-                </div>
-
-                <div class="relative pl-4 border-l-2 border-slate-200 group hover:border-slate-300 transition-colors">
-                    <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[7px] top-1.5 ring-4 ring-white group-hover:bg-slate-400 transition-colors"></div>
-                    <h4 class="font-semibold text-slate-800 text-sm">Formación Musical (FOBA)</h4>
-                    <p class="text-xs text-slate-500">Escuela de Arte Pedro Carpani</p>
-                    <p class="text-xs text-slate-400 mt-1">2018 - 2019 • Teoría musical completa, multi-instrumentista.</p>
-                </div>
-            </div>
-
-        </aside>
-
-        <!-- COLUMNA DERECHA (Experiencia Laboral) -->
-        <section class="lg:col-span-8 flex flex-col gap-6">
-            
-            <!-- PROYECTOS CUALIFICADOS -->
-            <div class="glass-card p-6 md:p-8 fade-in-up delay-200 relative overflow-hidden">
-                <!-- Deco background para la seccion de proyectos -->
-                <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-400 to-transparent opacity-50"></div>
-
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-                        <i data-lucide="rocket" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-800">Proyectos Cualificados</h3>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <!-- Proyecto: Ascender -->
-                    <a href="https://www.ascender.uno" target="_blank" rel="noopener noreferrer" class="group block p-5 rounded-2xl border border-slate-200 bg-white hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 transition-all">
-                        <div class="flex items-center gap-4 mb-3">
-                            <!-- Placeholder Logo -->
-                            <div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 group-hover:bg-brand-50 group-hover:border-brand-200 group-hover:text-brand-500 transition-all shrink-0 shadow-sm">
-                                <!-- Reemplazar este icono por la etiqueta <img> cuando tengas el logo -->
-                                <i data-lucide="image" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                        <!-- Name -->
+                        <div class="flex flex-col gap-0">
+                            <div class="overflow-hidden">
+                                <h1 class="hero-title font-display text-white reveal-text" id="hero-name-1">
+                                    Juan Manuel
+                                </h1>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors flex items-center gap-2">
-                                    Ascender
-                                    <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"></i>
-                                </h4>
-                                <span class="text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded">ascender.uno</span>
+                            <div class="overflow-hidden">
+                                <h1 class="hero-title font-display hero-title-gradient reveal-text" id="hero-name-2">
+                                    Merodio
+                                </h1>
                             </div>
                         </div>
-                        <p class="text-sm text-slate-600 leading-relaxed mt-2">
-                            Plataforma y proyecto web principal. (Podés agregar una breve descripción acá de qué tecnologías usaste).
+
+                        <!-- Typewriter -->
+                        <div class="hero-typewriter" id="hero-typewriter">
+                            <span id="tw-text"></span><span class="tw-cursor"></span>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="hero-divider" id="hero-divider"></div>
+
+                        <!-- Description -->
+                        <p class="hero-description" id="hero-desc">
+                            Construyo infraestructura digital que escala negocios. Desde arquitecturas modernas de alto rendimiento hasta sistemas de conversión automatizados con IA.
                         </p>
-                    </a>
 
-                    <!-- Proyecto: Delta -->
-                    <a href="https://www.ascender.uno/delta" target="_blank" rel="noopener noreferrer" class="group block p-5 rounded-2xl border border-slate-200 bg-white hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 transition-all">
-                        <div class="flex items-center gap-4 mb-3">
-                            <!-- Placeholder Logo -->
-                            <div class="w-14 h-14 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 group-hover:bg-brand-50 group-hover:border-brand-200 group-hover:text-brand-500 transition-all shrink-0 shadow-sm">
-                                <!-- Reemplazar este icono por la etiqueta <img> cuando tengas el logo -->
-                                <i data-lucide="image" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors flex items-center gap-2">
-                                    Agencia Delta
-                                    <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"></i>
-                                </h4>
-                                <span class="text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded">ascender.uno/delta</span>
-                            </div>
+                        <!-- CTA Buttons -->
+                        <div class="hero-cta-group" id="hero-ctas">
+                            <a href="#projects" class="hero-cta-primary hover-trigger" data-cursor="hover">
+                                Explore my work
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            </a>
+                            <a href="mailto:juanm.merodio@email.com" class="hero-cta-secondary hover-trigger" data-cursor="hover">
+                                Let's talk
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </a>
                         </div>
-                        <p class="text-sm text-slate-600 leading-relaxed mt-2">
-                            Sitio oficial de la agencia de marketing y desarrollo. Escalamiento de marcas personales.
-                        </p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="glass-card p-6 md:p-8 fade-in-up delay-300">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-                        <i data-lucide="briefcase" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-800">Experiencia Profesional</h3>
+
+                    <!-- Right Column: 3D Scene -->
+                    <div class="lg:col-span-6 xl:col-span-5 flex items-center justify-center" style="min-height: 350px;">
+                        <div id="hero-3d-container" class="w-full" style="height: clamp(300px, 45vh, 550px); opacity: 0;"></div>
+                    </div>
+
                 </div>
 
-                <!-- ITEM DE EXPERIENCIA: DELTA -->
-                <div class="mb-10 group relative pl-6 border-l-2 border-brand-100 hover:border-brand-400 transition-colors">
-                    <div class="absolute w-3 h-3 bg-brand-500 rounded-full -left-[7px] top-2 ring-4 ring-white group-hover:scale-125 transition-transform"></div>
-                    
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                        <h4 class="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Agencia Delta</h4>
-                        <span class="text-sm font-semibold text-brand-600 bg-brand-50 px-3 py-1 rounded-full w-fit mt-2 md:mt-0 border border-brand-100">2024 - Presente</span>
+                <!-- Bottom Row: Stats + Scroll Indicator -->
+                <div class="flex flex-col md:flex-row justify-between items-center mt-12 lg:mt-16 gap-8">
+
+                    <!-- Stats -->
+                    <div class="hero-stats" id="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number" data-target="5">0</span>
+                            <span class="hero-stat-label">Years Exp.</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number" data-target="20">0</span>
+                            <span class="hero-stat-label">Projects</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number" data-target="3">0</span>
+                            <span class="hero-stat-label">Brands Built</span>
+                        </div>
                     </div>
-                    <div class="text-md font-medium text-slate-500 mb-3">Fundador & Estratega Principal</div>
-                    <p class="text-sm text-slate-600 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        Fundación y gestión de una agencia de marketing digital orientada a escalar la facturación de marcas personales a través de servicios integrales de tecnología y contenido.
-                    </p>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-brand-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700"><strong>Desarrollo Web:</strong> Gestión y creación de landing pages y sitios web. Apertura de un programa exitoso con 10 cupos a precios accesibles para emprendedores de Campana.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-brand-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700"><strong>Gestión de Clientes:</strong> Logro de <strong class="text-brand-600 bg-brand-50 px-1 rounded">+10 clientes recurrentes y satisfechos</strong>, optimizando sus procesos de ventas.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-brand-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700"><strong>Content Creation:</strong> Edición profesional de videos de formato corto (Reels/Shorts/TikToks) orientados a alta retención y conversión.</span>
-                        </li>
-                    </ul>
-                </div>
 
-                <hr class="border-slate-100 mb-8 ml-6">
-
-                <!-- ITEM DE EXPERIENCIA: TEATRO ASTROS -->
-                <div class="mb-10 group relative pl-6 border-l-2 border-slate-100 hover:border-slate-300 transition-colors">
-                    <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[7px] top-2 ring-4 ring-white group-hover:bg-slate-400 transition-colors"></div>
-
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                        <h4 class="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">Teatro Astros CABA</h4>
-                        <span class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit mt-2 md:mt-0">2025 - 2026</span>
+                    <!-- Scroll Indicator -->
+                    <div class="scroll-indicator" id="scroll-indicator">
+                        <span>Scroll</span>
+                        <div class="scroll-line"></div>
                     </div>
-                    <div class="text-md font-medium text-slate-500 mb-3">Atención al Cliente & Relaciones Públicas</div>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700">Gestión de la experiencia del espectador en un entorno de alto tráfico, resolviendo consultas y garantizando la satisfacción del público.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700">Desarrollo de habilidades de comunicación interpersonal y manejo de situaciones dinámicas en tiempo real.</span>
-                        </li>
-                    </ul>
-                </div>
 
-                <hr class="border-slate-100 mb-8 ml-6">
-
-                <!-- ITEM DE EXPERIENCIA: TAXI DELTA -->
-                <div class="group relative pl-6 border-l-2 border-slate-100 hover:border-slate-300 transition-colors">
-                    <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[7px] top-2 ring-4 ring-white group-hover:bg-slate-400 transition-colors"></div>
-
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-2">
-                        <h4 class="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">Taxi Delta</h4>
-                        <span class="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-full w-fit mt-2 md:mt-0">2023 - 2024</span>
-                    </div>
-                    <div class="text-md font-medium text-slate-500 mb-3">Telefonista & Coordinación Logística</div>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700">Recepción de llamadas y gestión de reservas en simultáneo, requiriendo alta capacidad de multitasking y organización.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400 mt-0.5 shrink-0"></i>
-                            <span class="text-sm text-slate-700">Resolución de conflictos logísticos y optimización de rutas mediante comunicación constante con los conductores.</span>
-                        </li>
-                    </ul>
                 </div>
 
             </div>
-
         </section>
 
+        <!-- ABOUT & EXPERTISE SECTION -->
+        <section id="about" class="py-32 px-6 md:px-12 bg-bgDark relative z-10 border-t border-white/5">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+
+                    <div class="lg:col-span-4">
+                        <h2 class="font-display text-xs uppercase tracking-[0.3em] text-textMuted mb-8 reveal-up">/ El
+                            Perfil</h2>
+                        <h3 class="text-3xl md:text-5xl font-medium leading-tight reveal-up">
+                            Ingeniería pura, aplicada al crecimiento.
+                        </h3>
+                    </div>
+
+                    <div class="lg:col-span-8 flex flex-col gap-12">
+                        <p class="text-xl md:text-2xl text-textMuted font-light leading-relaxed reveal-up">
+                            Soy fundador de <span class="text-white font-medium">Delta</span>. Mi enfoque no es solo
+                            escribir código limpio; es construir infraestructura digital que escale marcas personales y
+                            negocios. Desde la optimización de servidores a bajo nivel hasta e-commerce de alto
+                            rendimiento con arquitecturas modernas.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                            <!-- Skill Box 1 -->
+                            <div
+                                class="glass-tag p-8 rounded-2xl reveal-up group hover:border-white/30 transition-colors">
+                                <div
+                                    class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="m18 16 4-4-4-4" />
+                                        <path d="m6 8-4 4 4 4" />
+                                        <path d="m14.5 4-5 16" />
+                                    </svg>
+                                </div>
+                                <h4 class="text-xl font-bold mb-3">Full-Stack Dev</h4>
+                                <p class="text-textMuted text-sm leading-relaxed mb-4">Arquitecturas robustas. Dominio
+                                    de frontend reactivo y backend estructurado.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">React</span>
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">Next.js</span>
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">Supabase</span>
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">C/C++</span>
+                                </div>
+                            </div>
+
+                            <!-- Skill Box 2 -->
+                            <div
+                                class="glass-tag p-8 rounded-2xl reveal-up group hover:border-white/30 transition-colors">
+                                <div
+                                    class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-black transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 2v20" />
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                    </svg>
+                                </div>
+                                <h4 class="text-xl font-bold mb-3">Digital Strategy</h4>
+                                <p class="text-textMuted text-sm leading-relaxed mb-4">Automatización con IA, CRM y
+                                    embudos VSL para llevar leads calificados.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">Gemini
+                                        API</span>
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">ManyChat</span>
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">App
+                                        Script</span>
+                                    <span
+                                        class="text-xs px-3 py-1 rounded-full border border-white/10 text-textMuted">VSL
+                                        Funnels</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION (Grid de Tarjetas Premium) -->
+        <section id="projects" class="py-32 px-6 md:px-12 relative z-10 bg-bgDark">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-16 border-b border-white/10 pb-6 reveal-up">
+                    <h2 class="text-4xl md:text-6xl font-display font-bold uppercase">Selected Work</h2>
+                    <span class="text-textMuted font-mono text-sm hidden md:block">(06 Proyectos Destacados)</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Proyecto 1 -->
+                    <a href="https://www.ascender.uno" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver el proyecto Ascender en una nueva pestaña"
+                        class="apple-card group flex flex-col hover-trigger" data-cursor="hover">
+                        <div
+                            class="aspect-video w-full overflow-hidden bg-white/[0.01] border-b border-white/5 relative">
+                            <img src="assets/ascender.png" alt="Mockup abstracto de Ascender"
+                                class="apple-card-img w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-all duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold text-white group-hover:text-brandTeal transition-colors duration-300">
+                                        Ascender</h3>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center project-arrow group-hover:bg-white group-hover:text-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 7h10v10" />
+                                            <path d="M7 17 17 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-textMuted text-sm font-light leading-relaxed mb-6">
+                                    Sistema automático MOFU-TOFU, VSL Funnel para infoproductos.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Web
+                                    App</span>
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Funnels</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 2 -->
+                    <a href="https://delta.netlify.app" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver el proyecto Agencia Delta en una nueva pestaña"
+                        class="apple-card group flex flex-col hover-trigger" data-cursor="hover">
+                        <div
+                            class="aspect-video w-full overflow-hidden bg-white/[0.01] border-b border-white/5 relative">
+                            <img src="assets/delta.png" alt="Mockup abstracto de Delta"
+                                class="apple-card-img w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-all duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold text-white group-hover:text-brandTeal transition-colors duration-300">
+                                        Agencia Delta</h3>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center project-arrow group-hover:bg-white group-hover:text-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 7h10v10" />
+                                            <path d="M7 17 17 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-textMuted text-sm font-light leading-relaxed mb-6">
+                                    Estrategias de crecimiento y gestión de leads para perfiles tech.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Corporate</span>
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Branding</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 3 -->
+                    <a href="https://www.afterbow.com" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver el proyecto Afterbow en una nueva pestaña"
+                        class="apple-card group flex flex-col hover-trigger" data-cursor="hover">
+                        <div
+                            class="aspect-video w-full overflow-hidden bg-white/[0.01] border-b border-white/5 relative">
+                            <img src="assets/afterbow.png" alt="Mockup abstracto de Afterbow"
+                                class="apple-card-img w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-all duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold text-white group-hover:text-brandTeal transition-colors duration-300">
+                                        Afterbow</h3>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center project-arrow group-hover:bg-white group-hover:text-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 7h10v10" />
+                                            <path d="M7 17 17 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-textMuted text-sm font-light leading-relaxed mb-6">
+                                    Desarrollo Web & Postproducción cinematográfica.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Multimedia</span>
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">DaVinci</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 4 -->
+                    <a href="https://quimicashop.vercel.app" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver el proyecto Esencia Química en una nueva pestaña"
+                        class="apple-card group flex flex-col hover-trigger" data-cursor="hover">
+                        <div
+                            class="aspect-video w-full overflow-hidden bg-white/[0.01] border-b border-white/5 relative">
+                            <img src="assets/quimica.png" alt="Mockup abstracto de Esencia Química"
+                                class="apple-card-img w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-all duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold text-white group-hover:text-brandTeal transition-colors duration-300">
+                                        Esencia Química</h3>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center project-arrow group-hover:bg-white group-hover:text-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 7h10v10" />
+                                            <path d="M7 17 17 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-textMuted text-sm font-light leading-relaxed mb-6">
+                                    E-Commerce Full-Stack escalable con Next.js y Supabase.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Next.js</span>
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">Supabase</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 5 -->
+                    <a href="https://notebing.netlify.app" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver el proyecto Notebing en una nueva pestaña"
+                        class="apple-card group flex flex-col hover-trigger" data-cursor="hover">
+                        <div
+                            class="aspect-video w-full overflow-hidden bg-white/[0.01] border-b border-white/5 relative">
+                            <img src="assets/notebing.png" alt="Mockup abstracto de Notebing"
+                                class="apple-card-img w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-all duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold text-white group-hover:text-brandTeal transition-colors duration-300">
+                                        Notebing</h3>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center project-arrow group-hover:bg-white group-hover:text-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 7h10v10" />
+                                            <path d="M7 17 17 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-textMuted text-sm font-light leading-relaxed mb-6">
+                                    Maquetación de Red Social de notas tipo almacén público/privado.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">React</span>
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">UI/UX</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 6 -->
+                    <a href="https://ascender.uno/BikeStuntImportados/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Ver el proyecto Bike Stunts en una nueva pestaña"
+                        class="apple-card group flex flex-col hover-trigger" data-cursor="hover">
+                        <div
+                            class="aspect-video w-full overflow-hidden bg-white/[0.01] border-b border-white/5 relative">
+                            <img src="assets/bikestunts.png" alt="Mockup abstracto de Bike Stunts"
+                                class="apple-card-img w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-all duration-700">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-bold text-white group-hover:text-brandTeal transition-colors duration-300">
+                                        Bike Stunts</h3>
+                                    <div
+                                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center project-arrow group-hover:bg-white group-hover:text-black">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M7 7h10v10" />
+                                            <path d="M7 17 17 7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-textMuted text-sm font-light leading-relaxed mb-6">
+                                    E-commerce gestionado por Google Sheets, IA y automatización ManyChat.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">JS/HTML/CSS</span>
+                                <span
+                                    class="text-[10px] uppercase tracking-wider px-3 py-1 rounded-full glass-tag text-textMuted">ManyChat</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="py-32 px-6 md:px-12 bg-bgDark relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+
+                    <div class="lg:col-span-4">
+                        <h2 class="text-4xl font-display font-bold uppercase sticky top-32 reveal-up">Career
+                            &<br>Experience</h2>
+                    </div>
+
+                    <div class="lg:col-span-8 flex flex-col">
+
+                        <!-- Exp 1 -->
+                        <div class="relative pl-8 md:pl-0 pb-16 border-l border-white/10 md:border-l-0 reveal-up">
+                            <div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-white md:hidden"></div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-t border-white/10 md:pt-8 md:mt-0">
+                                <div class="col-span-1 text-textMuted font-mono text-sm mt-1">2024 — Presente</div>
+                                <div class="col-span-3">
+                                    <h3 class="text-2xl font-bold text-white mb-1">Fundador & CEO</h3>
+                                    <h4 class="text-lg text-textMuted mb-4">Delta</h4>
+                                    <p class="text-textMuted font-light leading-relaxed mb-6">
+                                        Liderazgo en estrategias de crecimiento, metodologías de escalado y gestión
+                                        integral de leads para marcas personales y profesionales del sector tecnológico
+                                        (Sistemas/DevOps). Creación de infraestructuras de adquisición eficientes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exp 2 -->
+                        <div class="relative pl-8 md:pl-0 pb-16 border-l border-white/10 md:border-l-0 reveal-up">
+                            <div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-white/20 md:hidden">
+                            </div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-t border-white/10 md:pt-8 md:mt-0">
+                                <div class="col-span-1 text-textMuted font-mono text-sm mt-1">Reciente</div>
+                                <div class="col-span-3">
+                                    <h3 class="text-2xl font-bold text-white mb-1">Instructor & Estratega</h3>
+                                    <h4 class="text-lg text-textMuted mb-4">Matrix A</h4>
+                                    <p class="text-textMuted font-light leading-relaxed mb-6">
+                                        Entrenamiento de equipos (Appointment Setting) a más de 100 personas derivadas
+                                        de la audiencia de mi marca personal, implementando estrategias agresivas de
+                                        anuncios y cualificación CRM.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exp 3 -->
+                        <div class="relative pl-8 md:pl-0 pb-16 border-l border-white/10 md:border-l-0 reveal-up">
+                            <div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-white/20 md:hidden">
+                            </div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-t border-white/10 md:pt-8 md:mt-0">
+                                <div class="col-span-1 text-textMuted font-mono text-sm mt-1">Educación / UTN</div>
+                                <div class="col-span-3">
+                                    <h3 class="text-2xl font-bold text-white mb-1">Desarrollo IA (Pasantía)</h3>
+                                    <h4 class="text-lg text-textMuted mb-4">UTN - FRD (<a
+                                            href="https://ascender.uno/UTNContenidos/" target="_blank"
+                                            class="underline hover:text-white transition-colors hover-trigger"
+                                            data-cursor="hover">UTN Contenidos</a>)</h4>
+                                    <p class="text-textMuted font-light leading-relaxed mb-6">
+                                        Desarrollo de un sistema automatizado impulsado por IA para la creación de
+                                        planes de estudio, diapositivas y materiales visuales para profesores,
+                                        agilizando el flujo académico.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exp 4 (Infra/Redes) -->
+                        <div class="relative pl-8 md:pl-0 pb-16 border-l border-white/10 md:border-l-0 reveal-up">
+                            <div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-white/20 md:hidden">
+                            </div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-t border-white/10 md:pt-8 md:mt-0">
+                                <div class="col-span-1 text-textMuted font-mono text-sm mt-1">Infraestructura</div>
+                                <div class="col-span-3">
+                                    <h3 class="text-2xl font-bold text-white mb-1">Admin Servidores & Redes</h3>
+                                    <h4 class="text-lg text-textMuted mb-4">Pasantías Técnicas</h4>
+                                    <p class="text-textMuted font-light leading-relaxed mb-6">
+                                        Auditoría y estabilización de Servidores DHCP y redes Ethernet/Wi-Fi escolares.
+                                        Creación de un servidor local para hosting de proyectos. Modificación de OS
+                                        Windows para aumentar el rendimiento del hardware en un 70%.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exp 5 (Atención) -->
+                        <div class="relative pl-8 md:pl-0 pb-16 border-l border-transparent md:border-l-0 reveal-up">
+                            <div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-white/20 md:hidden">
+                            </div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 border-t border-white/10 md:pt-8 md:mt-0 border-b md:pb-8">
+                                <div class="col-span-1 text-textMuted font-mono text-sm mt-1">Skills Blandas</div>
+                                <div class="col-span-3">
+                                    <h3 class="text-2xl font-bold text-white mb-1">Atención al Cliente</h3>
+                                    <h4 class="text-lg text-textMuted mb-4">Teatro Astros & Taxi Delta</h4>
+                                    <p class="text-textMuted font-light leading-relaxed">
+                                        Resolución de conflictos y trato directo con el público en alto tráfico.
+                                        Logística dinámica, fortaleciendo mis habilidades de comunicación interpersonal
+                                        aplicadas hoy a ventas B2B.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWARDS & LOGROS -->
+        <section
+            class="py-20 px-6 md:px-12 bg-white text-bgDark relative z-10 selection:bg-bgDark selection:text-white">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 reveal-up">
+                <div class="flex-1">
+                    <h2 class="font-display font-bold text-3xl md:text-5xl uppercase tracking-tighter">Olimpiada
+                        Informática Argentina</h2>
+                    <p class="text-xl mt-2 font-medium opacity-70">Campeón Nacional (Nivel 3) — 2023</p>
+                </div>
+                <div class="w-24 h-24 rounded-full border-2 border-bgDark flex items-center justify-center shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                        <path d="M4 22h16" />
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER / CONTACT -->
+        <section class="py-32 px-6 md:px-12 relative z-10 bg-bgDark border-t border-white/5">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="text-6xl md:text-[8rem] font-display font-bold uppercase tracking-tighter leading-none mb-12 hover-trigger text-white"
+                    data-cursor="hover">
+                    <a href="mailto:juanm.merodio@email.com"
+                        class="hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-white to-gray-500 transition-all duration-500">LET'S
+                        TALK.</a>
+                </h2>
+
+                <div
+                    class="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/10 pt-12 mt-12">
+                    <p class="text-textMuted text-sm font-mono">© 2026 Juan Manuel Merodio. Técnico en Programación.</p>
+                    <div class="flex gap-6">
+                        <a href="https://www.linkedin.com/in/juan-manuel-merodio-50a29a274/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-white hover:text-textMuted transition-colors hover-trigger"
+                            data-cursor="hover">LinkedIn</a>
+                        <a href="https://github.com/juanmamerodio" target="_blank" rel="noopener noreferrer"
+                            class="text-white hover:text-textMuted transition-colors hover-trigger"
+                            data-cursor="hover">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Inicialización de íconos -->
+    <!-- SCRIPTS -->
+    <!-- Lenis para Smooth Scroll (La clave del aspecto premium) -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <script>
-        lucide.createIcons();
+        // --------------------------------------------------------
+        // 1. INIT SMOOTH SCROLLING (Lenis)
+        // --------------------------------------------------------
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --------------------------------------------------------
+        // 2. CUSTOM CURSOR LOGIC
+        // --------------------------------------------------------
+        const cursor = document.getElementById('custom-cursor');
+        const hoverTriggers = document.querySelectorAll('.hover-trigger');
+
+        // Solo ejecutar la lógica si el dispositivo tiene un puntero preciso (mouse)
+        if (window.matchMedia('(pointer: fine)').matches) {
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let cursorX = mouseX;
+            let cursorY = mouseY;
+            let isHovering = false;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Loop de animación para interpolar el movimiento del cursor (suavidad magnética)
+            const animateCursor = () => {
+                let ease = isHovering ? 0.15 : 0.2;
+                cursorX += (mouseX - cursorX) * ease;
+                cursorY += (mouseY - cursorY) * ease;
+
+                cursor.style.transform = `translate3d(${cursorX - (isHovering ? 30 : 10)}px, ${cursorY - (isHovering ? 30 : 10)}px, 0)`;
+
+                requestAnimationFrame(animateCursor);
+            };
+            animateCursor();
+
+            hoverTriggers.forEach(trigger => {
+                trigger.addEventListener('mouseenter', () => {
+                    isHovering = true;
+                    cursor.classList.add('hover');
+                });
+                trigger.addEventListener('mouseleave', () => {
+                    isHovering = false;
+                    cursor.classList.remove('hover');
+                });
+            });
+        }
+
+        // --------------------------------------------------------
+        // 3. GSAP ANIMATIONS & HERO INTERACTIVES
+        // --------------------------------------------------------
+        
+        // --- Typewriter Effect ---
+        const words = ["Full-Stack Developer", "Business Strategist", "Systems Architect"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const twText = document.getElementById("tw-text");
+
+        function type() {
+            if (!twText) return;
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                twText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                twText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 30 : 60;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // --- Stats Count Animation ---
+        function animateCounters() {
+            const counters = document.querySelectorAll(".hero-stat-number");
+            counters.forEach(counter => {
+                const target = +counter.getAttribute("data-target");
+                const obj = { val: 0 };
+                gsap.to(obj, {
+                    val: target,
+                    duration: 2,
+                    ease: "power3.out",
+                    onUpdate: () => {
+                        counter.textContent = Math.floor(obj.val) + "+";
+                    }
+                });
+            });
+        }
+
+        // --- Hero 3D Scene (Advanced Icosahedron & Glowing Orbit) ---
+        function initHero3D() {
+            const container = document.getElementById("hero-3d-container");
+            if (!container) return;
+
+            const width = container.clientWidth || 350;
+            const height = container.clientHeight || 450;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.z = 240;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Inner Icosahedron
+            const geometry = new THREE.IcosahedronGeometry(55, 1);
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x14b8a6,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.55
+            });
+            const icosahedron = new THREE.Mesh(geometry, material);
+            scene.add(icosahedron);
+
+            // Glow Icosahedron
+            const glowGeom = new THREE.IcosahedronGeometry(56, 1);
+            const glowMat = new THREE.MeshBasicMaterial({
+                color: 0x14b8a6,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.12
+            });
+            const glowMesh = new THREE.Mesh(glowGeom, glowMat);
+            scene.add(glowMesh);
+
+            // Orbiting Particles on a Sphere
+            const particleCount = 100;
+            const particleGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const speeds = new Float32Array(particleCount);
+            const angles = new Float32Array(particleCount * 2); // theta, phi
+            const radii = new Float32Array(particleCount);
+
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos((Math.random() * 2) - 1);
+                const radius = 62 + Math.random() * 18;
+
+                radii[i] = radius;
+                angles[i * 2] = theta;
+                angles[i * 2 + 1] = phi;
+                speeds[i] = 0.008 + Math.random() * 0.012;
+
+                positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i3 + 2] = radius * Math.cos(phi);
+            }
+
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const pMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 1.5,
+                transparent: true,
+                opacity: 0.6,
+                blending: THREE.AdditiveBlending
+            });
+
+            const pointCloud = new THREE.Points(particleGeometry, pMaterial);
+            scene.add(pointCloud);
+
+            // Interaction settings
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+            const halfX = width / 2;
+            const halfY = height / 2;
+
+            if (window.matchMedia('(pointer: fine)').matches) {
+                window.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const mouseX = e.clientX - rect.left - halfX;
+                    const mouseY = e.clientY - rect.top - halfY;
+                    targetX = mouseX * 0.08;
+                    targetY = mouseY * 0.08;
+                });
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                icosahedron.rotation.y += 0.0025;
+                icosahedron.rotation.x += 0.001;
+
+                glowMesh.rotation.y -= 0.0012;
+                glowMesh.rotation.x -= 0.0006;
+
+                const posArr = pointCloud.geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    const i3 = i * 3;
+                    angles[i * 2] += speeds[i];
+                    
+                    const radius = radii[i];
+                    const theta = angles[i * 2];
+                    const phi = angles[i * 2 + 1];
+
+                    posArr[i3] = radius * Math.sin(phi) * Math.cos(theta);
+                    posArr[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                    posArr[i3 + 2] = radius * Math.cos(phi);
+                }
+                pointCloud.geometry.attributes.position.needsUpdate = true;
+                pointCloud.rotation.y += 0.0008;
+
+                currentX += (targetX - currentX) * 0.05;
+                currentY += (targetY - currentY) * 0.05;
+
+                icosahedron.position.x = currentX;
+                icosahedron.position.y = -currentY;
+                glowMesh.position.copy(icosahedron.position);
+                pointCloud.position.copy(icosahedron.position);
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener("resize", () => {
+                const newWidth = container.clientWidth || 350;
+                const newHeight = container.clientHeight || 450;
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+        }
+
+        // --- Animations Setup ---
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            initHero3D();
+
+            const tl = gsap.timeline({ delay: 0.1 });
+
+            gsap.set(["#hero-badge", "#hero-typewriter", "#hero-divider", "#hero-desc", "#hero-ctas", "#hero-stats", "#scroll-indicator", ".hero-float-line", ".hero-float-circle"], { opacity: 0 });
+            gsap.set("#hero-3d-container", { scale: 0.8, opacity: 0 });
+
+            tl.to("#hero-badge", { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
+              .fromTo("#hero-name-1", { y: 100, opacity: 0, skewY: 4 }, { y: 0, opacity: 1, skewY: 0, duration: 1.0, ease: "power4.out" }, "-=0.6")
+              .fromTo("#hero-name-2", { y: 100, opacity: 0, skewY: 4 }, { y: 0, opacity: 1, skewY: 0, duration: 1.0, ease: "power4.out" }, "-=0.8")
+              .to("#hero-typewriter", { opacity: 1, duration: 0.5, onComplete: type }, "-=0.4")
+              .fromTo("#hero-divider", { width: 0, opacity: 0 }, { width: "100%", opacity: 1, duration: 1.0, ease: "power3.inOut" }, "-=0.4")
+              .fromTo("#hero-desc", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.4")
+              .fromTo("#hero-ctas", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.6")
+              .fromTo("#hero-stats", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out", onComplete: animateCounters }, "-=0.6")
+              .to("#scroll-indicator", { opacity: 1, duration: 0.8 }, "-=0.4")
+              .to("#hero-3d-container", { scale: 1, opacity: 1, duration: 1.5, ease: "power3.out" }, "0.2")
+              .to([".hero-float-line", ".hero-float-circle"], { opacity: 1, duration: 1.5, stagger: 0.2 }, "0.4");
+
+            gsap.to("#hero-3d-container", {
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom 30%",
+                    scrub: true
+                },
+                y: 120,
+                scale: 0.8,
+                opacity: 0
+            });
+
+            const revealUps = document.querySelectorAll('.reveal-up');
+            revealUps.forEach(element => {
+                gsap.fromTo(element,
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+        } else {
+            console.warn("GSAP o ScrollTrigger no definidos. Saltando animaciones y revelando contenido.");
+            document.querySelectorAll('.reveal-text, .reveal-up').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+            type();
+            animateCounters();
+            initHero3D();
+        }
+
+        // --------------------------------------------------------
+        // 4. THREE.JS BACKGROUND SCENE (Sistema de Partículas Elegante & Interactivo)
+        // --------------------------------------------------------
+        try {
+            const container = document.getElementById('webgl-container');
+            if (container) {
+                const scene = new THREE.Scene();
+                // Neblina sutil para fundir los bordes en la oscuridad
+                scene.fog = new THREE.FogExp2(0x000000, 0.0008);
+
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+                camera.position.z = 420;
+
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limitar a max 2 para optimizar rendimiento
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                container.appendChild(renderer.domElement);
+
+                // Geometría base: Torus Knot compuesto por miles de partículas
+                const geometry = new THREE.TorusKnotGeometry(140, 38, 280, 24);
+                const posAttribute = geometry.attributes.position;
+                const count = posAttribute.count;
+
+                // Pre-calculamos las tres formas (Torus, Esfera, Galaxia) para evitar cálculos en el bucle de renderizado
+                const positionsA = new Float32Array(count * 3);
+                const positionsB = new Float32Array(count * 3);
+                const positionsC = new Float32Array(count * 3);
+
+                for (let i = 0; i < count; i++) {
+                    const i3 = i * 3;
+                    const x = posAttribute.getX(i);
+                    const y = posAttribute.getY(i);
+                    const z = posAttribute.getZ(i);
+
+                    // 1. Forma A: Torus Knot con ruido orgánico
+                    positionsA[i3] = x + (Math.random() - 0.5) * 4;
+                    positionsA[i3 + 1] = y + (Math.random() - 0.5) * 4;
+                    positionsA[i3 + 2] = z + (Math.random() - 0.5) * 4;
+
+                    // 2. Forma B: Proyección Esférica
+                    const length = Math.sqrt(x * x + y * y + z * z);
+                    positionsB[i3] = (x / length) * 165 + (Math.random() - 0.5) * 8;
+                    positionsB[i3 + 1] = (y / length) * 165 + (Math.random() - 0.5) * 8;
+                    positionsB[i3 + 2] = (z / length) * 165 + (Math.random() - 0.5) * 8;
+
+                    // 3. Forma C: Galaxia Espiral Plana
+                    const fraction = i / count;
+                    const theta = fraction * Math.PI * 2 * 18; // 18 espirales
+                    const r = fraction * 270 + 40; // radio
+                    positionsC[i3] = Math.cos(theta) * r + (Math.random() - 0.5) * 12;
+                    positionsC[i3 + 1] = Math.sin(theta) * r + (Math.random() - 0.5) * 12;
+                    positionsC[i3 + 2] = Math.sin(fraction * Math.PI * 8) * 30;
+                }
+
+                // Crear la geometría de puntos final
+                const pointGeometry = new THREE.BufferGeometry();
+                // Inicialmente cargamos el Torus
+                pointGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positionsA, 3));
+
+                // Material brillante de partículas brandTeal con blending aditivo
+                const material = new THREE.PointsMaterial({
+                    size: 1.6,
+                    color: 0x14b8a6, // Brand Teal
+                    transparent: true,
+                    opacity: 0.5,
+                    blending: THREE.AdditiveBlending
+                });
+
+                const particles = new THREE.Points(pointGeometry, material);
+                scene.add(particles);
+
+                // Control del estado de la interpolación (0 = Torus, 1 = Esfera, 2 = Galaxia)
+                const morphStates = { progress: 0 };
+
+                // Vinculamos la transición de las formas con el scroll general de la página si GSAP está disponible
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.to(morphStates, {
+                        progress: 2,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: "body",
+                            start: "top top",
+                            end: "bottom bottom",
+                            scrub: 1.2
+                        }
+                    });
+                } else {
+                    window.addEventListener('scroll', () => {
+                        const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                        morphStates.progress = scrollPercent * 2;
+                    });
+                }
+
+                // Variables para el parallax por mouse
+                let targetX = 0;
+                let targetY = 0;
+                const windowHalfX = window.innerWidth / 2;
+                const windowHalfY = window.innerHeight / 2;
+
+                if (window.matchMedia('(pointer: fine)').matches) {
+                    document.addEventListener('mousemove', (e) => {
+                        targetX = (e.clientX - windowHalfX) * 0.04;
+                        targetY = (e.clientY - windowHalfY) * 0.04;
+                    }, false);
+                }
+
+                // Loop de renderizado optimizado
+                const positions = pointGeometry.attributes.position.array;
+
+                function animateThreeJS() {
+                    requestAnimationFrame(animateThreeJS);
+
+                    const p = morphStates.progress;
+
+                    // Interpolación lineal de vértices
+                    for (let i = 0; i < count; i++) {
+                        const i3 = i * 3;
+                        let xVal, yVal, zVal;
+
+                        if (p <= 1) {
+                            // Interpolación Torus -> Esfera
+                            xVal = positionsA[i3] + (positionsB[i3] - positionsA[i3]) * p;
+                            yVal = positionsA[i3 + 1] + (positionsB[i3 + 1] - positionsA[i3 + 1]) * p;
+                            zVal = positionsA[i3 + 2] + (positionsB[i3 + 2] - positionsA[i3 + 2]) * p;
+                        } else {
+                            // Interpolación Esfera -> Galaxia
+                            const t = p - 1;
+                            xVal = positionsB[i3] + (positionsC[i3] - positionsB[i3]) * t;
+                            yVal = positionsB[i3 + 1] + (positionsC[i3 + 1] - positionsB[i3 + 1]) * t;
+                            zVal = positionsB[i3 + 2] + (positionsC[i3 + 2] - positionsB[i3 + 2]) * t;
+                        }
+
+                        positions[i3] = xVal;
+                        positions[i3 + 1] = yVal;
+                        positions[i3 + 2] = zVal;
+                    }
+                    pointGeometry.attributes.position.needsUpdate = true;
+
+                    // Rotación continua sutil
+                    particles.rotation.y += 0.0012;
+                    particles.rotation.x += 0.0006;
+
+                    // Aplicación del parallax suave
+                    particles.position.x += (targetX - particles.position.x) * 0.02;
+                    particles.position.y += (-targetY - particles.position.y) * 0.02;
+
+                    renderer.render(scene, camera);
+                }
+
+                animateThreeJS();
+
+                // Manejo del responsive
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+        } catch (error) {
+            console.warn("WebGL no soportado o error al inicializar Three.js: ", error);
+        }
+
     </script>
 </body>
+
 </html>
